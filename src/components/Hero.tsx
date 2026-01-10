@@ -97,47 +97,47 @@ export function Hero() {
         </div>
 
         {/* Logo & Name */}
-        <div className="mb-8 flex items-center justify-center gap-4">
+        <div className="mb-6 sm:mb-8 flex items-center justify-center gap-3 sm:gap-4">
           <Image
             src="/logo.png"
             alt="DevNest Logo"
             width={80}
             height={80}
             priority
-            className="w-20 h-20 object-contain drop-shadow-lg shadow-primary/30 animate-bounce"
+            className="w-16 h-16 sm:w-20 sm:h-20 object-contain drop-shadow-lg shadow-primary/30 animate-bounce"
             style={{ animationDuration: "3s" }}
           />
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-poppins font-bold glow-text">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-poppins font-bold glow-text">
             DevNest
           </h1>
         </div>
 
         {/* Main Heading */}
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-poppins font-bold mb-4 text-foreground">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-poppins font-bold mb-3 sm:mb-4 text-foreground px-2">
           At DevNest, we don't just learn technology — we <span className="text-primary">live it</span>
         </h2>
 
         {/* Subheading */}
-        <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto mb-6">
+        <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-4 sm:mb-6 px-4">
           A student-driven community of innovators, creators, and tech enthusiasts — led by Google Campus Ambassadors at Lamrin Tech Skills University Punjab
         </p>
 
         {/* Description */}
-        <div className="max-w-3xl mx-auto mb-8">
-          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
+        <div className="max-w-3xl mx-auto mb-6 sm:mb-8 px-4">
+          <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">
             Blending creativity, innovation, and hands-on learning. We bring together passionate minds from diverse technical domains — Artificial Intelligence, Cybersecurity, Cloud Computing, Data Science, and Web Development — to collaborate, build, and grow through real-world experiences.
           </p>
         </div>
 
         {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-8 sm:mb-12 px-4">
           <Button
             asChild
             size="lg"
-            className="bg-primary hover:bg-primary/90 text-primary-foreground gap-2 neon-border"
+            className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground gap-2 neon-border"
           >
             <Link href="/join">
-              <Zap className="w-5 h-5" />
+              <Zap className="w-4 h-4 sm:w-5 sm:h-5" />
               Join the Nest
             </Link>
           </Button>
@@ -145,64 +145,64 @@ export function Hero() {
             asChild
             size="lg"
             variant="outline"
-            className="border-secondary text-secondary hover:bg-secondary/10 gap-2"
+            className="w-full sm:w-auto border-secondary text-secondary hover:bg-secondary/10 gap-2"
           >
             <Link href="/projects">💡 Explore Projects</Link>
           </Button>
         </div>
 
         {/* Rotating Quote */}
-        <div className="mb-12 text-center">
-          <div className="glass-effect rounded-xl p-6 inline-block max-w-2xl">
-            <p className="text-lg sm:text-xl italic text-foreground font-manrope">
+        <div className="mb-8 sm:mb-12 text-center px-4">
+          <div className="glass-effect rounded-xl p-4 sm:p-6 inline-block max-w-2xl w-full">
+            <p className="text-base sm:text-lg md:text-xl italic text-foreground font-manrope">
               {displayedQuote}
             </p>
           </div>
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 mt-16">
-          <div className="glass-effect rounded-lg p-6 hover-lift">
-            <Users className="w-8 h-8 text-primary mx-auto mb-2" />
-            <div className="text-3xl sm:text-4xl font-poppins font-bold text-primary mb-1">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mt-12 sm:mt-16 px-2">
+          <div className="glass-effect rounded-lg p-4 sm:p-6 hover-lift">
+            <Users className="w-6 h-6 sm:w-8 sm:h-8 text-primary mx-auto mb-2" />
+            <div className="text-2xl sm:text-3xl md:text-4xl font-poppins font-bold text-primary mb-1">
               {counters.members}+
             </div>
-            <p className="text-sm text-muted-foreground">Community Members</p>
+            <p className="text-xs sm:text-sm text-muted-foreground">Community Members</p>
           </div>
 
-          <div className="glass-effect rounded-lg p-6 hover-lift">
-            <Trophy className="w-8 h-8 text-primary mx-auto mb-2" />
-            <div className="text-3xl sm:text-4xl font-poppins font-bold text-primary mb-1">
+          <div className="glass-effect rounded-lg p-4 sm:p-6 hover-lift">
+            <Trophy className="w-6 h-6 sm:w-8 sm:h-8 text-primary mx-auto mb-2" />
+            <div className="text-2xl sm:text-3xl md:text-4xl font-poppins font-bold text-primary mb-1">
               {counters.projects}+
             </div>
-            <p className="text-sm text-muted-foreground">Live Projects</p>
+            <p className="text-xs sm:text-sm text-muted-foreground">Live Projects</p>
           </div>
 
-          <div className="glass-effect rounded-lg p-6 hover-lift">
-            <Zap className="w-8 h-8 text-secondary mx-auto mb-2" />
-            <div className="text-3xl sm:text-4xl font-poppins font-bold text-secondary mb-1">
+          <div className="glass-effect rounded-lg p-4 sm:p-6 hover-lift">
+            <Zap className="w-6 h-6 sm:w-8 sm:h-8 text-secondary mx-auto mb-2" />
+            <div className="text-2xl sm:text-3xl md:text-4xl font-poppins font-bold text-secondary mb-1">
               {counters.events}+
             </div>
-            <p className="text-sm text-muted-foreground">Tech Events</p>
+            <p className="text-xs sm:text-sm text-muted-foreground">Tech Events</p>
           </div>
 
-          <div className="glass-effect rounded-lg p-6 hover-lift">
-            <Building2 className="w-8 h-8 text-secondary mx-auto mb-2" />
-            <div className="text-3xl sm:text-4xl font-poppins font-bold text-secondary mb-1">
+          <div className="glass-effect rounded-lg p-4 sm:p-6 hover-lift">
+            <Building2 className="w-6 h-6 sm:w-8 sm:h-8 text-secondary mx-auto mb-2" />
+            <div className="text-2xl sm:text-3xl md:text-4xl font-poppins font-bold text-secondary mb-1">
               {counters.partners}+
             </div>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs sm:text-sm text-muted-foreground">
               Industry Partners
             </p>
           </div>
         </div>
 
         {/* Scroll Indicator */}
-        <div className="mt-16 animate-bounce">
-          <div className="text-muted-foreground mb-2">Scroll to explore</div>
+        <div className="mt-12 sm:mt-16 animate-bounce">
+          <div className="text-sm sm:text-base text-muted-foreground mb-2">Scroll to explore</div>
           <div className="flex justify-center">
             <svg
-              className="w-6 h-6 text-primary"
+              className="w-5 h-5 sm:w-6 sm:h-6 text-primary"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"

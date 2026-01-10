@@ -131,13 +131,13 @@ export default function HackverseEventPage() {
 							))}
 						</div>
 						<div className="flex flex-col sm:flex-row gap-4 justify-center">
-							<Button asChild className="gap-2">
+							<Button asChild size="lg" className="gap-2 text-base sm:text-lg py-6 sm:py-7 font-semibold shadow-lg hover:shadow-xl transition-all">
 								<Link href="#hackverse-form">
-									<Zap className="h-4 w-4" />
-									Jump to Registration
+									<Zap className="h-5 w-5" />
+									Register Now
 								</Link>
 							</Button>
-							<Button asChild variant="outline">
+							<Button asChild variant="outline" size="lg" className="py-6 sm:py-7">
 								<Link href={WHATSAPP_GROUP_LINK} target="_blank" rel="noreferrer">
 									Join WhatsApp Lobby
 								</Link>
@@ -211,12 +211,27 @@ const HackverseDetailsSection = () => (
 			</div>
 		</div>
 
+		<div className="flex justify-center">
+			<Button asChild size="lg" className="gap-2 text-base sm:text-lg px-8 py-6 sm:py-7 font-semibold shadow-lg hover:shadow-xl transition-all">
+				<Link href="#hackverse-form">
+					<Zap className="h-5 w-5" />
+					Register Your Team Now
+				</Link>
+			</Button>
+		</div>
+
 		<div className="glass-effect rounded-3xl border border-border/40 p-6">
 			<h3 className="text-xl font-semibold mb-4">Payment & Support</h3>
 			<p className="text-muted-foreground mb-3">
 				A registration fee of <strong>₹100 per participant</strong> applies. Keep your transaction ID handy for submitting the form. Once paid, make sure every teammate has joined the official WhatsApp group for real-time announcements.
 			</p>
 			<div className="flex flex-wrap gap-3 mb-4">
+				<Button asChild size="lg" className="gap-2 font-semibold">
+					<Link href="#hackverse-form">
+						<Zap className="h-4 w-4" />
+						Register Now
+					</Link>
+				</Button>
 				<Button asChild variant="outline">
 					<Link href={WHATSAPP_GROUP_LINK} target="_blank" rel="noreferrer">
 						Join WhatsApp Group

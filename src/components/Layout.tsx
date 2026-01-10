@@ -116,20 +116,22 @@ export function Layout({ children }: LayoutProps) {
 
             {/* Mobile Nav */}
             {isMenuOpen && (
-              <div className="md:hidden pb-4 space-y-2">
+              <div className="md:hidden pb-4 pt-2 space-y-1 animate-in slide-in-from-top duration-200">
                 {navItems.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="block px-3 py-2 rounded-lg text-sm font-medium hover:bg-primary/10 hover:text-primary transition-colors"
+                    className="block px-4 py-3 rounded-lg text-base font-medium hover:bg-primary/10 hover:text-primary transition-colors active:scale-95"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {item.label}
                   </Link>
                 ))}
-                <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground gap-2" asChild>
-                  <Link href="/join">🚀 Join</Link>
-                </Button>
+                <div className="pt-2">
+                  <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground gap-2 py-3" asChild>
+                    <Link href="/join">🚀 Join</Link>
+                  </Button>
+                </div>
               </div>
             )}
           </div>
@@ -140,11 +142,11 @@ export function Layout({ children }: LayoutProps) {
 
         {/* Footer */}
         <footer className="bg-muted/50 border-t border-border/40 mt-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-8">
               {/* Brand */}
-              <div>
-                <div className="flex items-center gap-2 mb-4">
+              <div className="text-center sm:text-left">
+                <div className="flex items-center gap-2 mb-4 justify-center sm:justify-start">
                   <Image
                     src="/logo.png"
                     alt="DevNest Logo"
@@ -162,7 +164,7 @@ export function Layout({ children }: LayoutProps) {
               </div>
 
               {/* Quick Links */}
-              <div>
+              <div className="text-center sm:text-left">
                 <h3 className="font-poppins font-semibold mb-4">Quick Links</h3>
                 <ul className="space-y-2 text-sm">
                   {navItems.map((item) => (
@@ -179,7 +181,7 @@ export function Layout({ children }: LayoutProps) {
               </div>
 
               {/* Community */}
-              <div>
+              <div className="text-center sm:text-left">
                 <h3 className="font-poppins font-semibold mb-4">Community</h3>
                 <ul className="space-y-2 text-sm">
                   <li>
@@ -210,11 +212,11 @@ export function Layout({ children }: LayoutProps) {
               </div>
 
               {/* Newsletter */}
-              <div>
+              <div className="text-center sm:text-left">
                 <h3 className="font-poppins font-semibold mb-4">
                   Stay Updated
                 </h3>
-                <div className="flex gap-2">
+                <div className="flex flex-col sm:flex-row gap-2">
                   <input
                     type="email"
                     placeholder="Your email"
@@ -222,7 +224,7 @@ export function Layout({ children }: LayoutProps) {
                   />
                   <Button
                     size="sm"
-                    className="bg-primary hover:bg-primary/90 text-primary-foreground"
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground w-full sm:w-auto"
                   >
                     Subscribe
                   </Button>
@@ -231,16 +233,16 @@ export function Layout({ children }: LayoutProps) {
             </div>
 
             {/* Social Links */}
-            <div className="flex items-center justify-between pt-8 border-t border-border/40">
-              <p className="text-sm text-muted-foreground">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-border/40">
+              <p className="text-xs sm:text-sm text-muted-foreground text-center sm:text-left">
                 © 2025 Devnest | Built with 💚 by Innovators
               </p>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4 sm:gap-4">
                 <a
                   href="https://github.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary transition-colors"
+                  className="text-muted-foreground hover:text-primary transition-colors p-2 hover:bg-primary/10 rounded-lg"
                   aria-label="GitHub"
                   title="GitHub"
                 >
@@ -250,7 +252,7 @@ export function Layout({ children }: LayoutProps) {
                   href="https://www.linkedin.com/company/devnestclub"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary transition-colors"
+                  className="text-muted-foreground hover:text-primary transition-colors p-2 hover:bg-primary/10 rounded-lg"
                   aria-label="LinkedIn"
                   title="LinkedIn"
                 >
@@ -260,7 +262,7 @@ export function Layout({ children }: LayoutProps) {
                   href="https://www.instagram.com/devnest_tech_club/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary transition-colors"
+                  className="text-muted-foreground hover:text-primary transition-colors p-2 hover:bg-primary/10 rounded-lg"
                   aria-label="Instagram"
                   title="Instagram"
                 >
@@ -268,7 +270,7 @@ export function Layout({ children }: LayoutProps) {
                 </a>
                 <a
                   href="mailto:devnest.techclub@gmail.com"
-                  className="text-muted-foreground hover:text-primary transition-colors"
+                  className="text-muted-foreground hover:text-primary transition-colors p-2 hover:bg-primary/10 rounded-lg"
                   aria-label="Email"
                   title="Email"
                 >

@@ -3,8 +3,8 @@
     {
       "id": 1,
       "name": "Aaditya Kumar",
-      "role": "Core Team Member",
-      "designation": "DevNest Co-Founder",
+      "role": "President",
+      "designation": "DevNest President",
       "bio": "Quiet focus today builds unstoppable strength tomorrow. Visionary leader driving DevNest's mission.",
       "image": "💻",
       "socials": {
@@ -16,8 +16,8 @@
     {
       "id": 2,
       "name": "Tabinda Naseem",
-      "role": "Core Team Member",
-      "designation": "DevNest Co-Founder",
+      "role": "Vice President",
+      "designation": "DevNest Vice President",
       "bio": "My soul is alight with the fire of the world's motion, made brighter by my resolve. Empowering tech enthusiasts.",
       "image": "✨",
       "socials": {
@@ -29,10 +29,10 @@
     {
       "id": 3,
       "name": "Ayush Kumar Jha",
-      "role": "Core Team Member",
-      "designation": "DevNest Co-Founder",
+      "role": "Secretary",
+      "designation": "DevNest Secretary",
       "bio": "Precision in thought, perfection in execution. Building the future of DevNest with strategic vision.",
-      "image": "�️",
+      "image": "🛡️",
       "socials": {
         "github": "#",
         "linkedin": "https://www.linkedin.com/in/ayush-kumar-jha-058b64323",
@@ -42,10 +42,75 @@
     {
       "id": 4,
       "name": "Nandini Jaishree",
-      "role": "Core Team Member",
-      "designation": "DevNest Co-Founder",
+      "role": "CFO",
+      "designation": "DevNest Chief Financial Officer",
       "bio": "Dedicated to fostering innovation and excellence in the DevNest community. Leading with passion and purpose.",
       "image": "🚀",
+      "socials": {
+        "github": "#",
+        "linkedin": "#",
+        "instagram": "#"
+      }
+    },
+    {
+      "id": 5,
+      "name": "Yogesh Kumar Mishra",
+      "role": "Club Operation Head",
+      "designation": "DevNest Club Operation Head",
+      "bio": "Driving operational excellence and ensuring smooth club activities. Committed to building a thriving community.",
+      "image": "⚙️",
+      "socials": {
+        "github": "#",
+        "linkedin": "#",
+        "instagram": "#"
+      }
+    },
+    {
+      "id": 6,
+      "name": "Manish Yadav",
+      "role": "Technical Head",
+      "designation": "DevNest Technical Head",
+      "bio": "Leading technical initiatives and driving innovation. Passionate about empowering developers with cutting-edge skills.",
+      "image": "🔧",
+      "socials": {
+        "github": "#",
+        "linkedin": "#",
+        "instagram": "#"
+      }
+    },
+    {
+      "id": 7,
+      "name": "Hemanth Chakka",
+      "role": "Technical Coordinator",
+      "designation": "DevNest Technical Coordinator",
+      "bio": "Coordinating technical workshops and hackathons. Building bridges between ideas and implementation.",
+      "image": "💡",
+      "socials": {
+        "github": "#",
+        "linkedin": "https://www.linkedin.com/in/hemanth-chakka/",
+        "instagram": "#"
+      }
+    },
+    {
+      "id": 8,
+      "name": "Parampreet Singh",
+      "role": "Technical Coordinator",
+      "designation": "DevNest Technical Coordinator",
+      "bio": "Fostering collaboration and technical excellence. Dedicated to creating impactful learning experiences.",
+      "image": "🎯",
+      "socials": {
+        "github": "#",
+        "linkedin": "#",
+        "instagram": "#"
+      }
+    },
+    {
+      "id": 9,
+      "name": "Sheikh Masood Ahmad",
+      "role": "Ideation and Outreach Coordinator",
+      "designation": "DevNest Ideation and Outreach Coordinator",
+      "bio": "Connecting ideas with opportunities. Building partnerships and expanding DevNest's reach in the tech community.",
+      "image": "🌟",
       "socials": {
         "github": "#",
         "linkedin": "#",
