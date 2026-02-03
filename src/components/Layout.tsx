@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -12,6 +12,7 @@ import {
   MessageCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTheme } from "next-themes";
 
 interface LayoutProps {
   children: ReactNode;
@@ -19,17 +20,15 @@ interface LayoutProps {
 
 export function Layout({ children }: LayoutProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDark, setIsDark] = useState(false);
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const toggleDarkMode = () => {
-    const html = document.documentElement;
-    if (isDark) {
-      html.classList.remove("dark");
-      setIsDark(false);
-    } else {
-      html.classList.add("dark");
-      setIsDark(true);
-    }
+    setTheme(theme === "dark" ? "light" : "dark");
   };
 
   const navItems = [
@@ -44,7 +43,7 @@ export function Layout({ children }: LayoutProps) {
   ];
 
   return (
-    <div className={isDark ? "dark" : ""}>
+    <div>
       <div className="min-h-screen bg-background text-foreground flex flex-col">
         {/* Navigation */}
         <nav className="sticky top-0 z-50 glass-effect border-b border-border/40">
@@ -85,7 +84,7 @@ export function Layout({ children }: LayoutProps) {
                   className="p-2 rounded-lg hover:bg-accent/10 transition-colors"
                   aria-label="Toggle dark mode"
                 >
-                  {isDark ? (
+                  {mounted && theme === "dark" ? (
                     <Sun className="w-5 h-5 text-yellow-400" />
                   ) : (
                     <Moon className="w-5 h-5" />

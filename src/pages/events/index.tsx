@@ -8,12 +8,12 @@ import { Button } from "@/components/ui/button";
 const upcomingEvents = [
 	{
 		id: 1,
-		title: "HackVerse X Google 2025",
+		title: "ByteBloom hackfest 2025",
 		date: "November 2025",
 		time: "12-hour marathon",
 		location: "Lamrin Tech Skills University, Punjab",
 		description:
-			"Hosted by the DevNest Technical Club, HackVerse X Google is your 12-hour playground to brainstorm, build, and ship impactful prototypes with guidance from industry mentors.",
+			"Hosted by the DevNest Technical Club, ByteBloom hackfest is your 12-hour playground to brainstorm, build, and ship impactful prototypes with guidance from industry mentors.",
 		domains: ["AI", "Cybersecurity", "Web Development"],
 		capacity: "500+ Students",
 		highlights: [
@@ -24,8 +24,8 @@ const upcomingEvents = [
 		],
 		status: "open" as const,
 		icon: "🚀",
-		registrationUrl: "/events/hackverse-register",
-		learnMoreUrl: "/events/hackverse",
+		registrationUrl: "/events/bytebloom-register",
+		learnMoreUrl: "/events/bytebloom",
 	},
 ];
 
@@ -211,7 +211,7 @@ export default function EventsPage() {
 														href={event.learnMoreUrl}
 														className="text-sm text-primary hover:underline"
 													>
-														Explore the HackVerse hub →
+														Explore the ByteBloom hackfest hub →
 													</Link>
 												</>
 											) : (
@@ -224,7 +224,7 @@ export default function EventsPage() {
 								</article>
 							))}
 
-							<HackversePromoCard />
+							<ByteBloomPromoCard />
 						</div>
 					)}
 
@@ -297,7 +297,7 @@ export default function EventsPage() {
 	);
 }
 
-const HackversePromoCard = () => (
+const ByteBloomPromoCard = () => (
 	<section className="glass-effect rounded-3xl border border-border/40 bg-background/80 p-8">
 		<div className="grid gap-6 lg:grid-cols-[1.2fr,0.8fr] items-center">
 			<div>
@@ -305,19 +305,19 @@ const HackversePromoCard = () => (
 					Spotlight
 				</p>
 				<h3 className="text-3xl font-poppins font-bold mb-4">
-					HackVerse X Google 2025
+					ByteBloom hackfest 2025
 				</h3>
 				<p className="text-muted-foreground mb-5">
-					Dive deeper into challenge statements, timelines, and submission details on the dedicated HackVerse hub, complete with FAQs and the official DevNest registration form.
+					Dive deeper into challenge statements, timelines, and submission details on the dedicated ByteBloom hackfest hub, complete with FAQs and the official DevNest registration form.
 				</p>
 				<div className="flex flex-col gap-3 sm:flex-row">
 					<Button asChild className="gap-2">
-						<Link href="/events/hackverse">
+						<Link href="/events/bytebloom">
 							Explore the full event
 						</Link>
 					</Button>
 					<Button asChild variant="outline" className="gap-2">
-						<Link href="/events/hackverse-register">
+						<Link href="/events/bytebloom-register">
 							Jump to registration
 						</Link>
 					</Button>
@@ -326,7 +326,7 @@ const HackversePromoCard = () => (
 			<div className="rounded-2xl border border-dashed border-primary/40 p-6 text-sm text-muted-foreground">
 				<p className="font-semibold text-primary mb-2">Key Details</p>
 				<ul className="space-y-2">
-					<li>🏆 Cash prizes + Google recognized certificates</li>
+					<li>🏆 Cash prizes + participation certificates</li>
 					<li>👥 Teams of 2–4 from any department</li>
 					<li>📍 On-campus at Lamrin Tech Skills University</li>
 					<li>🗓️ Registration deadline: 28 Oct 2025</li>

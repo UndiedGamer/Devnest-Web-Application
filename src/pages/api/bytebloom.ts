@@ -1,12 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
 import {
-	appendHackverseSubmission,
+	appendByteBloomSubmission,
 	getExistingRollConflicts,
-	type HackverseSubmissionRecord,
-} from "../../../server/hackverse-storage";
+	type ByteBloomSubmissionRecord,
+} from "../../../server/bytebloom-storage";
 
-const requiredFields: Array<keyof HackverseSubmissionRecord> = [
+const requiredFields: Array<keyof ByteBloomSubmissionRecord> = [
 	"submittedAt",
 	"fullName",
 	"rollNumber",
@@ -26,7 +26,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		return res.status(405).json({ message: "Method not allowed" });
 	}
 
-	const payload = req.body as Partial<HackverseSubmissionRecord>;
+	const payload = req.body as Partial<ByteBloomSubmissionRecord>;
 
 	const missing = requiredFields.filter((field) => {
 		const value = payload[field];
@@ -55,7 +55,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			});
 		}
 
-		const record: HackverseSubmissionRecord = {
+		const record: ByteBloomSubmissionRecord = {
 			submittedAt: payload.submittedAt!,
 			fullName: payload.fullName!,
 			rollNumber: payload.rollNumber!,
@@ -74,11 +74,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			notes: payload.notes ?? "",
 		};
 
-		await appendHackverseSubmission(record);
+		await appendByteBloomSubmission(record);
 
 		return res.status(200).json({ message: "Submission stored" });
 	} catch (error) {
-		console.error("HackVerse API error", error);
+		console.error("ByteBloom API error", error);
 		return res.status(500).json({ message: "Failed to save submission" });
 	}
 }

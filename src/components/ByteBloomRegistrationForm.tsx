@@ -35,7 +35,7 @@ const PAYMENT_QR_ENDPOINT = "/api/payment-qr";
 
 const normalizeRoll = (roll?: string | null) => roll?.trim().toLowerCase() ?? "";
 
-export type HackverseFormValues = {
+export type ByteBloomFormValues = {
 	fullName: string;
 	rollNumber: string;
 	department: string;
@@ -54,7 +54,7 @@ export type HackverseFormValues = {
 	notes: string;
 };
 
-const hackverseDefaultValues: HackverseFormValues = {
+const bytebloomDefaultValues: ByteBloomFormValues = {
 	fullName: "",
 	rollNumber: "",
 	department: "",
@@ -73,7 +73,7 @@ const hackverseDefaultValues: HackverseFormValues = {
 	notes: "",
 };
 
-export const HackverseRegistrationForm = () => {
+export const ByteBloomRegistrationForm = () => {
 	const { toast } = useToast();
 	const [status, setStatus] = useState<"idle" | "loading">("idle");
 	const [qrStatus, setQrStatus] = useState<"loading" | "loaded" | "error">("loading");
@@ -82,8 +82,8 @@ export const HackverseRegistrationForm = () => {
 	const qrObjectUrlRef = useRef<string | null>(null);
 	const isMountedRef = useRef(true);
 
-	const form = useForm<HackverseFormValues>({
-		defaultValues: hackverseDefaultValues,
+	const form = useForm<ByteBloomFormValues>({
+		defaultValues: bytebloomDefaultValues,
 	});
 
 	const teamSize = useWatch({ control: form.control, name: "teamSize" });
@@ -102,7 +102,7 @@ export const HackverseRegistrationForm = () => {
 
 			const values = form.getValues();
 			const rollFields: Array<{
-				field: keyof HackverseFormValues;
+				field: keyof ByteBloomFormValues;
 				value: string;
 			}> = [
 					{ field: "rollNumber", value: values.rollNumber },
@@ -177,10 +177,10 @@ export const HackverseRegistrationForm = () => {
 		}
 	}, [numericTeamSize, form]);
 
-	const onSubmit = async (values: HackverseFormValues) => {
+	const onSubmit = async (values: ByteBloomFormValues) => {
 		setStatus("loading");
 		try {
-			const response = await fetch("/api/hackverse", {
+			const response = await fetch("/api/bytebloom", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -205,7 +205,7 @@ export const HackverseRegistrationForm = () => {
 						errorMessage = `${errorMessage} (Conflicts: ${errorData.conflicts.join(", ")})`;
 					}
 				} catch (parseError) {
-					console.error("HackVerse error payload parse", parseError);
+					console.error("ByteBloom hackfest error payload parse", parseError);
 				}
 
 				if (handled) {
@@ -225,9 +225,9 @@ export const HackverseRegistrationForm = () => {
 				description: "We will reach out with next steps soon.",
 			});
 
-			form.reset(hackverseDefaultValues);
+			form.reset(bytebloomDefaultValues);
 		} catch (error) {
-			console.error("HackVerse submission error", error);
+			console.error("ByteBloom hackfest submission error", error);
 			const fallbackMessage = "Please try again or email us at devnest.techclub@gmail.com.";
 			const description =
 				error instanceof Error && error.message ? error.message : fallbackMessage;
@@ -243,12 +243,12 @@ export const HackverseRegistrationForm = () => {
 
 	return (
 		<section
-			id="hackverse-form"
+			id="bytebloom-form"
 			className="glass-effect rounded-3xl border border-border/50 bg-background/80 p-8 shadow-2xl"
 		>
 			<div className="text-center max-w-3xl mx-auto mb-10">
 				<span className="inline-block px-4 py-2 rounded-full bg-secondary/20 text-secondary text-sm font-semibold mb-4">
-					HackVerse X Google | Registration
+					ByteBloom hackfest | Registration
 				</span>
 				<h2 className="text-3xl font-poppins font-bold mb-3">
 					Submit your squad details
@@ -358,7 +358,7 @@ export const HackverseRegistrationForm = () => {
 						<div>
 							<h3 className="text-xl font-semibold">Team Roster</h3>
 							<p className="text-sm text-muted-foreground">
-								Tell us about the squad you are bringing to HackVerse and add each member's roll number for verification.
+								Tell us about the squad you are bringing to ByteBloom hackfest and add each member's roll number for verification.
 							</p>
 						</div>
 						<div className="grid gap-6 md:grid-cols-2">
@@ -573,7 +573,7 @@ export const HackverseRegistrationForm = () => {
 											<div className="space-y-1 text-sm leading-tight">
 												<FormLabel className="font-semibold">Joined the official WhatsApp group *</FormLabel>
 												<p className="text-muted-foreground">
-													Tap the link to stay updated: <Link href={WHATSAPP_GROUP_LINK} target="_blank" rel="noreferrer" className="text-primary underline">HackVerse WhatsApp Lobby</Link>
+													Tap the link to stay updated: <Link href={WHATSAPP_GROUP_LINK} target="_blank" rel="noreferrer" className="text-primary underline">ByteBloom hackfest WhatsApp Lobby</Link>
 												</p>
 											</div>
 											<FormMessage />
@@ -598,7 +598,7 @@ export const HackverseRegistrationForm = () => {
 									{qrStatus === "loaded" && qrSrc && (
 										<Image
 											src={qrSrc}
-											alt="HackVerse payment QR"
+											alt="ByteBloom hackfest payment QR"
 											width={320}
 											height={320}
 											className="h-auto w-full rounded-xl"
@@ -631,7 +631,7 @@ export const HackverseRegistrationForm = () => {
 						</div>
 						<div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 							<p className="text-sm text-muted-foreground">
-								By submitting, you agree to HackVerse X Google guidelines and consent to DevNest contacting you via email/WhatsApp.
+								By submitting, you agree to ByteBloom hackfest guidelines and consent to DevNest contacting you via email/WhatsApp.
 							</p>
 							<Button type="submit" className="gap-2" disabled={status === "loading"}>
 								{status === "loading" && <Loader2 className="h-4 w-4 animate-spin" />}

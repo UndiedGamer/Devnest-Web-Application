@@ -1,6 +1,6 @@
 import { initializeFirebaseAdmin } from "../src/lib/firebase-admin";
 
-export type HackverseSubmissionRecord = {
+export type ByteBloomSubmissionRecord = {
 	submittedAt: string;
 	fullName: string;
 	rollNumber: string;
@@ -33,7 +33,7 @@ export const getExistingRollConflicts = async (rolls: string[]) => {
 	}
 
 	try {
-		const submissionsRef = adminDb.collection("hackverse-submissions");
+		const submissionsRef = adminDb.collection("bytebloom-submissions");
 		const snapshot = await submissionsRef.get();
 		const conflicts = new Set<string>();
 
@@ -62,11 +62,11 @@ export const getExistingRollConflicts = async (rolls: string[]) => {
 	}
 };
 
-export const appendHackverseSubmission = async (record: HackverseSubmissionRecord) => {
+export const appendByteBloomSubmission = async (record: ByteBloomSubmissionRecord) => {
 	const { adminDb } = initializeFirebaseAdmin();
 
 	try {
-		const submissionsRef = adminDb.collection("hackverse-submissions");
+		const submissionsRef = adminDb.collection("bytebloom-submissions");
 		await submissionsRef.add({
 			...record,
 			createdAt: new Date().toISOString(),

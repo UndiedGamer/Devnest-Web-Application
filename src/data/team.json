@@ -2,6 +2,19 @@
   "coreTeam": [
     {
       "id": 1,
+      "name": "Prof. Wakeel Ahmad",
+      "role": "Faculty Coordinator",
+      "designation": "Faculty Coordinator",
+      "bio": "Guiding DevNest's academic initiatives and fostering student-faculty collaboration. Committed to nurturing innovation and technical excellence.",
+      "image": "👨‍🏫",
+      "socials": {
+        "github": "#",
+        "linkedin": "#",
+        "instagram": "#"
+      }
+    },
+    {
+      "id": 10,
       "name": "Aaditya Kumar",
       "role": "President",
       "designation": "DevNest President",
@@ -14,7 +27,7 @@
       }
     },
     {
-      "id": 2,
+      "id": 10,
       "name": "Tabinda Naseem",
       "role": "Vice President",
       "designation": "DevNest Vice President",
@@ -27,7 +40,7 @@
       }
     },
     {
-      "id": 3,
+      "id": 10,
       "name": "Ayush Kumar Jha",
       "role": "Secretary",
       "designation": "DevNest Secretary",
@@ -40,7 +53,7 @@
       }
     },
     {
-      "id": 4,
+      "id": 10,
       "name": "Nandini Jaishree",
       "role": "CFO",
       "designation": "DevNest Chief Financial Officer",
@@ -53,7 +66,7 @@
       }
     },
     {
-      "id": 5,
+      "id": 10,
       "name": "Yogesh Kumar Mishra",
       "role": "Club Operation Head",
       "designation": "DevNest Club Operation Head",
@@ -66,7 +79,7 @@
       }
     },
     {
-      "id": 6,
+      "id": 10,
       "name": "Manish Yadav",
       "role": "Technical Head",
       "designation": "DevNest Technical Head",
@@ -79,7 +92,7 @@
       }
     },
     {
-      "id": 7,
+      "id": 10,
       "name": "Hemanth Chakka",
       "role": "Technical Coordinator",
       "designation": "DevNest Technical Coordinator",
@@ -92,7 +105,7 @@
       }
     },
     {
-      "id": 8,
+      "id": 10,
       "name": "Parampreet Singh",
       "role": "Technical Coordinator",
       "designation": "DevNest Technical Coordinator",
@@ -105,7 +118,7 @@
       }
     },
     {
-      "id": 9,
+      "id": 10,
       "name": "Sheikh Masood Ahmad",
       "role": "Ideation and Outreach Coordinator",
       "designation": "DevNest Ideation and Outreach Coordinator",
