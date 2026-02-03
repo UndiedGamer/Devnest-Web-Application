@@ -105,13 +105,13 @@ export default function GuestSpeakerFebPage() {
 					<div className="glass-effect rounded-3xl border border-border/50 p-8 mb-8 text-center">
 						<div className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-semibold mb-4">
 							<Calendar className="inline-block w-4 h-4 mr-1" />
-						5th February 2026
+							5th February 2026
 						</div>
 						<h1 className="text-4xl sm:text-5xl font-poppins font-bold mb-4">
 							Guest Speaker Event
 						</h1>
 						<p className="text-muted-foreground max-w-2xl mx-auto">
-						Join us for an inspiring session with <span className="font-semibold text-foreground">Amit Kumar Jaiswal</span>, IIM Bangalore graduate and founder of <span className="font-semibold text-foreground">aptitude360online</span>. Register now to secure your spot!
+							Join us for an inspiring session with <span className="font-semibold text-foreground">Amit Kumar Jaiswal</span>, IIM Bangalore graduate and founder of <span className="font-semibold text-foreground">aptitude360online</span>. Register now to secure your spot!
 						</p>
 					</div>
 
@@ -262,7 +262,7 @@ export default function GuestSpeakerFebPage() {
 									<div>
 										<p className="font-medium">Date & Time</p>
 										<p className="text-sm text-muted-foreground">
-										5th February 2026 (Time TBA)
+											5th February 2026 (Time TBA)
 										</p>
 									</div>
 								</div>
@@ -270,10 +270,10 @@ export default function GuestSpeakerFebPage() {
 									<User className="w-5 h-5 text-primary mt-0.5" />
 									<div>
 										<p className="font-medium">Speaker</p>
-									<p className="text-sm text-muted-foreground">
-										Amit Kumar Jaiswal<br />
-										<span className="text-xs">IIM Bangalore Graduate • aptitude360online</span>
-									</p>
+										<p className="text-sm text-muted-foreground">
+											Amit Kumar Jaiswal<br />
+											<span className="text-xs">IIM Bangalore Graduate • aptitude360online</span>
+										</p>
 									</div>
 								</div>
 							</div>
