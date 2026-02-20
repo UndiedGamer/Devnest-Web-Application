@@ -31,28 +31,13 @@ const upcomingEvents = [
 
 const pastEvents = [
 	{
-		id: 3,
-		title: "AI & Machine Learning Bootcamp",
-		date: "August 2025",
-		attendees: "300+",
-		highlight: "Covered TensorFlow, PyTorch, and real-world ML applications",
-		icon: "🤖",
-	},
-	{
-		id: 4,
-		title: "Cybersecurity Fundamentals",
-		date: "July 2025",
-		attendees: "250+",
-		highlight: "Ethical hacking, penetration testing, and vulnerability assessment",
-		icon: "🔒",
-	},
-	{
-		id: 5,
-		title: "Web Dev Sprint",
-		date: "June 2025",
-		attendees: "350+",
-		highlight: "Built 15+ live projects using React and modern frameworks",
-		icon: "💻",
+		id: 1,
+		title: "Guest Speaker Event",
+		date: "February 5, 2026",
+		attendees: "150+",
+		highlight: "Inspiring session with Amit Kumar Jaiswal, IIM Bangalore graduate and founder of aptitude360online",
+		icon: "🎤",
+		link: "/events/guest-speaker-feb",
 	},
 ];
 
@@ -237,31 +222,33 @@ export default function EventsPage() {
 							</div>
 							<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 								{pastEvents.map((event) => (
-									<article
-										key={event.id}
-										className="glass-effect rounded-lg p-6 hover-lift transition-all"
-									>
-										<div className="flex items-start gap-4 mb-4">
-											<div className="text-4xl" aria-hidden>
-												{event.icon}
+									<Link key={event.id} href={event.link}>
+										<article className="glass-effect rounded-lg p-6 hover-lift transition-all cursor-pointer hover:border-primary/50 border border-transparent h-full">
+											<div className="flex items-start gap-4 mb-4">
+												<div className="text-4xl" aria-hidden>
+													{event.icon}
+												</div>
+												<div className="flex-1">
+													<h3 className="font-poppins font-bold mb-1">
+														{event.title}
+													</h3>
+													<p className="text-sm text-muted-foreground">
+														{event.date}
+													</p>
+												</div>
 											</div>
-											<div className="flex-1">
-												<h3 className="font-poppins font-bold mb-1">
-													{event.title}
-												</h3>
-												<p className="text-sm text-muted-foreground">
-													{event.date}
-												</p>
+											<p className="text-muted-foreground text-sm mb-4">
+												{event.highlight}
+											</p>
+											<div className="flex items-center justify-between">
+												<div className="flex items-center gap-2 text-sm text-primary font-semibold">
+													<Users className="w-4 h-4" />
+													{event.attendees} attended
+												</div>
+												<span className="text-sm text-primary">View →</span>
 											</div>
-										</div>
-										<p className="text-muted-foreground text-sm mb-4">
-											{event.highlight}
-										</p>
-										<div className="flex items-center gap-2 text-sm text-primary font-semibold">
-											<Users className="w-4 h-4" />
-											{event.attendees} attended
-										</div>
-									</article>
+										</article>
+									</Link>
 								))}
 							</div>
 						</div>

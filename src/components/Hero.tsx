@@ -15,9 +15,7 @@ const HERO_QUOTES = [
 export function Hero() {
   const [counters, setCounters] = useState({
     members: 0,
-    projects: 0,
     events: 0,
-    partners: 0,
   });
 
   const [displayedQuote, setDisplayedQuote] = useState(
@@ -26,10 +24,8 @@ export function Hero() {
 
   useEffect(() => {
     const counterTargets = {
-      members: 500,
-      projects: 120,
-      events: 45,
-      partners: 15,
+      members: 150,
+      events: 1,
     };
 
     const duration = 2000;
@@ -42,9 +38,7 @@ export function Hero() {
 
       setCounters({
         members: Math.floor(counterTargets.members * progress),
-        projects: Math.floor(counterTargets.projects * progress),
         events: Math.floor(counterTargets.events * progress),
-        partners: Math.floor(counterTargets.partners * progress),
       });
 
       if (currentStep >= steps) {
@@ -161,7 +155,7 @@ export function Hero() {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mt-12 sm:mt-16 px-2">
+        <div className="grid grid-cols-2 gap-4 md:gap-8 mt-12 sm:mt-16 px-2 max-w-2xl mx-auto">
           <div className="glass-effect rounded-lg p-4 sm:p-6 hover-lift">
             <Users className="w-6 h-6 sm:w-8 sm:h-8 text-primary mx-auto mb-2" />
             <div className="text-2xl sm:text-3xl md:text-4xl font-poppins font-bold text-primary mb-1">
@@ -171,29 +165,11 @@ export function Hero() {
           </div>
 
           <div className="glass-effect rounded-lg p-4 sm:p-6 hover-lift">
-            <Trophy className="w-6 h-6 sm:w-8 sm:h-8 text-primary mx-auto mb-2" />
-            <div className="text-2xl sm:text-3xl md:text-4xl font-poppins font-bold text-primary mb-1">
-              {counters.projects}+
-            </div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Live Projects</p>
-          </div>
-
-          <div className="glass-effect rounded-lg p-4 sm:p-6 hover-lift">
             <Zap className="w-6 h-6 sm:w-8 sm:h-8 text-secondary mx-auto mb-2" />
             <div className="text-2xl sm:text-3xl md:text-4xl font-poppins font-bold text-secondary mb-1">
               {counters.events}+
             </div>
             <p className="text-xs sm:text-sm text-muted-foreground">Tech Events</p>
-          </div>
-
-          <div className="glass-effect rounded-lg p-4 sm:p-6 hover-lift">
-            <Building2 className="w-6 h-6 sm:w-8 sm:h-8 text-secondary mx-auto mb-2" />
-            <div className="text-2xl sm:text-3xl md:text-4xl font-poppins font-bold text-secondary mb-1">
-              {counters.partners}+
-            </div>
-            <p className="text-xs sm:text-sm text-muted-foreground">
-              Industry Partners
-            </p>
           </div>
         </div>
 
