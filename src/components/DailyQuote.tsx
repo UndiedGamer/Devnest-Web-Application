@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Lightbulb, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import quotesData from "@/data/quotes.json";
+import Shuffle from "@/components/Shuffle";
 
 interface Quote {
   text: string;
@@ -32,15 +33,13 @@ export function DailyQuote() {
 
   return (
     <section className="relative py-12 bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 rounded-xl overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute top-0 right-0 w-40 h-40 bg-primary/20 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-pulse" />
-      <div className="absolute bottom-0 left-0 w-40 h-40 bg-secondary/20 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-pulse animation-delay-2000" />
+      {/* Removed animated background - using global background from Layout */}
 
       <div className="relative z-10 max-w-3xl mx-auto px-6 text-center">
         <Lightbulb className="w-8 h-8 text-primary mx-auto mb-4" />
-        <p className="text-lg sm:text-2xl italic text-foreground font-semibold mb-4 leading-relaxed">
-          "{currentQuote.text}"
-        </p>
+        <div className="text-lg sm:text-2xl italic text-foreground font-semibold mb-4 leading-relaxed">
+          <Shuffle text={`"${currentQuote.text}"`} />
+        </div>
         <p className="text-sm text-muted-foreground mb-6">
           — {currentQuote.author} • {currentQuote.category}
         </p>

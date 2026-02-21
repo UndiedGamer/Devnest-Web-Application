@@ -44,35 +44,56 @@ export function Layout({ children }: LayoutProps) {
 
   return (
     <div>
-      <div className="min-h-screen bg-background text-foreground flex flex-col">
+      <div className="min-h-screen bg-background text-foreground flex flex-col relative">
+        {/* GPU-Accelerated Global Background */}
+        <div className="fixed inset-0 pointer-events-none z-0" style={{ contain: 'layout style paint', willChange: 'transform' }}>
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-muted/20" style={{ transform: 'translateZ(0)', backfaceVisibility: 'hidden' }} />
+          <div className="absolute top-20 right-20 w-[500px] h-[500px] bg-primary/10 rounded-full" style={{ filter: 'blur(80px)', transform: 'translate3d(0,0,0)', willChange: 'transform', backfaceVisibility: 'hidden', opacity: 0.3 }} />
+          <div className="absolute bottom-20 left-20 w-[600px] h-[600px] bg-primary/8 rounded-full" style={{ filter: 'blur(80px)', transform: 'translate3d(0,0,0)', willChange: 'transform', backfaceVisibility: 'hidden', opacity: 0.25 }} />
+        </div>
+
         {/* Navigation */}
-        <nav className="sticky top-0 z-50 glass-effect border-b border-border/40">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between h-16">
+        <nav className="sticky top-0 z-50 backdrop-blur-xl bg-background/80 border-b border-primary/30 shadow-lg shadow-primary/5" style={{ willChange: 'transform', transform: 'translateZ(0)' }}>
+          {/* Gradient Accent Line */}
+          <div className="absolute inset-x-0 bottom-0 h-[1px] bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" style={{ transform: 'translateZ(0)' }} />
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div className="flex items-center justify-between h-16 sm:h-20">
               {/* Logo */}
-              <Link href="/" className="flex items-center gap-2 group">
-                <Image
-                  src="/logo.png"
-                  alt="DevNest Logo"
-                  width={40}
-                  height={40}
-                  priority
-                  className="w-10 h-10 object-contain group-hover:scale-110 transition-transform"
-                />
-                <span className="font-poppins font-bold text-xl glow-text hidden sm:inline">
-                  Devnest
-                </span>
+              <Link href="/" className="flex items-center gap-3 group relative">
+                <div className="relative" style={{ willChange: 'transform' }}>
+                  <div className="absolute inset-0 bg-primary/20 rounded-full group-hover:bg-primary/40 transition-all duration-300" style={{ filter: 'blur(12px)', transform: 'translateZ(0)' }} />
+                  <Image
+                    src="/logo.png"
+                    alt="DevNest Logo"
+                    width={44}
+                    height={44}
+                    priority
+                    className="w-11 h-11 object-contain group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 relative z-10"
+                    style={{ transform: 'translateZ(0)', willChange: 'transform' }}
+                  />
+                </div>
+                <div className="hidden sm:flex flex-col">
+                  <span className="font-poppins font-bold text-xl bg-gradient-to-r from-primary via-primary to-primary/70 bg-clip-text text-transparent group-hover:tracking-wider transition-all duration-300">
+                    DevNest
+                  </span>
+                  <span className="text-[10px] text-muted-foreground font-medium -mt-1">Tech Community</span>
+                </div>
               </Link>
 
               {/* Desktop Nav */}
-              <div className="hidden md:flex items-center gap-1">
+              <div className="hidden md:flex items-center gap-2">
                 {navItems.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="px-3 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-primary/10 hover:text-primary"
+                    className="px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 hover:bg-primary/10 hover:text-primary relative group overflow-hidden"
                   >
-                    {item.label}
+                    <span className="relative z-10">{item.label}</span>
+                    {/* Animated underline */}
+                    <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-primary to-primary/50 group-hover:w-3/4 group-hover:left-[12.5%] transition-all duration-300" />
+                    {/* Hover glow */}
+                    <span className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </Link>
                 ))}
               </div>
@@ -94,41 +115,59 @@ export function Layout({ children }: LayoutProps) {
                 <Button
                   asChild
                   size="sm"
-                  className="bg-primary hover:bg-primary/90 text-primary-foreground hidden sm:inline-flex gap-2"
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground hidden sm:inline-flex gap-2 shadow-lg shadow-primary/30 hover:shadow-primary/50 hover:scale-105 transition-all duration-200 neon-border"
                 >
                   <Link href="/join">🚀 Join</Link>
                 </Button>
 
-                {/* Mobile menu button */}
+                {/* Modern Hamburger Menu Button */}
                 <button
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
-                  className="md:hidden p-2 rounded-lg hover:bg-accent/10"
+                  className="md:hidden p-2.5 rounded-xl hover:bg-primary/10 transition-all duration-300 relative group border border-transparent hover:border-primary/30"
+                  aria-label="Toggle menu"
                 >
-                  {isMenuOpen ? (
-                    <X className="w-5 h-5" />
-                  ) : (
-                    <Menu className="w-5 h-5" />
-                  )}
+                  <div className="w-6 h-5 flex flex-col justify-between items-end relative">
+                    <span className={`h-0.5 bg-foreground rounded-full transition-all duration-300 ${isMenuOpen ? 'w-6 rotate-45 translate-y-2' : 'w-6'
+                      } group-hover:bg-primary`} />
+                    <span className={`h-0.5 bg-foreground rounded-full transition-all duration-300 ${isMenuOpen ? 'w-0 opacity-0' : 'w-5'
+                      } group-hover:bg-primary`} />
+                    <span className={`h-0.5 bg-foreground rounded-full transition-all duration-300 ${isMenuOpen ? 'w-6 -rotate-45 -translate-y-2' : 'w-4'
+                      } group-hover:bg-primary`} />
+                  </div>
+                  {/* Glow effect */}
+                  <span className="absolute inset-0 rounded-xl bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </button>
               </div>
             </div>
 
-            {/* Mobile Nav */}
+            {/* Enhanced Mobile Nav */}
             {isMenuOpen && (
-              <div className="md:hidden pb-4 pt-2 space-y-1 animate-in slide-in-from-top duration-200">
-                {navItems.map((item) => (
+              <div className="md:hidden pb-6 pt-4 space-y-2 animate-in slide-in-from-top duration-300 border-t border-primary/10 mt-2 bg-gradient-to-b from-primary/5 to-transparent">
+                {navItems.map((item, index) => (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="block px-4 py-3 rounded-lg text-base font-medium hover:bg-primary/10 hover:text-primary transition-colors active:scale-95"
+                    className="block px-5 py-3.5 rounded-xl text-base font-medium hover:bg-primary/10 hover:text-primary transition-all duration-300 active:scale-95 border border-primary/10 hover:border-primary/30 backdrop-blur-sm relative group overflow-hidden"
                     onClick={() => setIsMenuOpen(false)}
+                    style={{ animationDelay: `${index * 50}ms` }}
                   >
-                    {item.label}
+                    <span className="relative z-10 flex items-center justify-between">
+                      {item.label}
+                      <span className="text-primary opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+                    </span>
+                    {/* Animated gradient on hover */}
+                    <span className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
                   </Link>
                 ))}
-                <div className="pt-2">
-                  <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground gap-2 py-3" asChild>
-                    <Link href="/join">🚀 Join</Link>
+                <div className="pt-3 px-1">
+                  <Button className="w-full bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-primary-foreground gap-2 py-4 shadow-xl shadow-primary/40 neon-border font-semibold text-base rounded-xl relative overflow-hidden group" asChild>
+                    <Link href="/join">
+                      <span className="relative z-10 flex items-center gap-2 justify-center">
+                        🚀 Join DevNest
+                      </span>
+                      {/* Shine effect */}
+                      <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                    </Link>
                   </Button>
                 </div>
               </div>
@@ -137,7 +176,7 @@ export function Layout({ children }: LayoutProps) {
         </nav>
 
         {/* Main Content */}
-        <main className="flex-grow">{children}</main>
+        <main className="flex-grow relative z-10">{children}</main>
 
         {/* Footer */}
         <footer className="bg-muted/50 border-t border-border/40 mt-20">

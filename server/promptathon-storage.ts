@@ -1,6 +1,6 @@
 import { initializeFirebaseAdmin } from "../src/lib/firebase-admin";
 
-export type ByteBloomSubmissionRecord = {
+export type PromptatonSubmissionRecord = {
 	submittedAt: string;
 	fullName: string;
 	rollNumber: string;
@@ -56,7 +56,7 @@ export const getExistingRollConflicts = async (rolls: string[]) => {
 	}
 };
 
-export const appendByteBloomSubmission = async (record: ByteBloomSubmissionRecord) => {
+export const appendPromptatonSubmission = async (record: PromptatonSubmissionRecord) => {
 	const { adminDb } = initializeFirebaseAdmin();
 
 	try {

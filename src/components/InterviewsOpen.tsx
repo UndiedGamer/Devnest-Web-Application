@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Zap, CheckCircle, Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import ShinyText from "@/components/ShinyText";
 
 export function InterviewsOpen() {
   const isOpen = true; // Toggle this to change status
@@ -14,11 +15,7 @@ export function InterviewsOpen() {
 
   return (
     <section className="relative py-12 sm:py-16 bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 overflow-hidden rounded-xl my-8 sm:my-12 mx-4 sm:mx-0">
-      {/* Animated Background */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-0 left-0 w-40 h-40 bg-primary/30 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" />
-        <div className="absolute bottom-0 right-0 w-40 h-40 bg-secondary/30 rounded-full mix-blend-multiply filter blur-3xl animate-pulse animation-delay-2000" />
-      </div>
+      {/* Removed animated background - using global background from Layout */}
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 md:px-8">
         {/* Status Badge */}
@@ -47,8 +44,8 @@ export function InterviewsOpen() {
               className="w-12 h-12 sm:w-16 sm:h-16 object-contain"
             />
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-poppins font-bold mb-3 sm:mb-4 glow-text px-2">
-            🚀 Join Our Core Team!
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-poppins font-bold mb-3 sm:mb-4 px-2">
+            🚀 <ShinyText text="Join Our Core Team!" className="glow-text" speed={2} />
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto mb-2 px-2">
             We're seeking passionate innovators to become part of DevNest's leadership. As a core member, you'll lead initiatives, mentor students, and drive meaningful impact across AI, Web Development, Cloud Computing, Cybersecurity, and Data Science.

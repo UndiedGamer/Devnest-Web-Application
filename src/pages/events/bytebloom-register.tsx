@@ -4,7 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
-export default function ByteBloomRegistrationPage() {
+export default function PromptatonRegistrationPage() {
 	return (
 		<Layout>
 			<div className="min-h-screen bg-gradient-to-b from-background to-muted/40 py-16">

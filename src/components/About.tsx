@@ -1,4 +1,5 @@
 import { CheckCircle, Target, Lightbulb, Heart, Code, Users, Rocket, Zap } from "lucide-react";
+import ShinyText from "@/components/ShinyText";
 
 export function About() {
   const timeline = [
@@ -83,12 +84,26 @@ export function About() {
   ];
 
   return (
-    <section className="relative py-16 sm:py-20 bg-gradient-to-b from-background to-muted/30 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative py-16 sm:py-20 bg-gradient-to-b from-background via-background to-muted/30 overflow-hidden">
+      {/* Animated Circuit Pattern Background */}
+      <div className="absolute inset-0 opacity-[0.03]">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `
+            linear-gradient(90deg, transparent 0%, transparent 49%, rgba(0, 184, 113, 0.3) 49%, rgba(0, 184, 113, 0.3) 51%, transparent 51%, transparent 100%),
+            linear-gradient(0deg, transparent 0%, transparent 49%, rgba(0, 184, 113, 0.3) 49%, rgba(0, 184, 113, 0.3) 51%, transparent 51%, transparent 100%)
+          `,
+          backgroundSize: '80px 80px',
+          animation: 'float 25s linear infinite'
+        }} />
+      </div>
+
+      {/* Removed animated background elements - using global background from Layout */}
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-poppins font-bold mb-3 sm:mb-4">
-            About <span className="glow-text">DevNest</span>
+            About <ShinyText text="DevNest" className="glow-text" speed={2} />
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto px-2">
             DevNest is the official Technical Club of Lamrin Tech Skills University Punjab, established to inspire and empower students to explore the limitless world of technology.
@@ -200,8 +215,8 @@ export function About() {
                   {/* Content */}
                   <div
                     className={`glass-effect rounded-lg p-5 sm:p-6 w-full ${index % 2 === 0
-                        ? "lg:mr-auto lg:w-[45%]"
-                        : "lg:ml-auto lg:w-[45%]"
+                      ? "lg:mr-auto lg:w-[45%]"
+                      : "lg:ml-auto lg:w-[45%]"
                       }`}
                   >
                     <div className="flex items-start gap-3 sm:gap-4">

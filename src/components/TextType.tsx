@@ -29,7 +29,7 @@ const TextType = ({
   as: Component = 'div',
   typingSpeed = 50,
   initialDelay = 0,
-  pauseDuration = 2000,
+  pauseDuration = 1200,
   deletingSpeed = 30,
   loop = true,
   className = '',
@@ -50,6 +50,7 @@ const TextType = ({
   const [isDeleting, setIsDeleting] = useState(false);
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(!startOnVisible);
+  const [hasStarted, setHasStarted] = useState(false);
   const cursorRef = useRef<HTMLSpanElement>(null);
   const containerRef = useRef<HTMLElement>(null);
 
@@ -86,13 +87,14 @@ const TextType = ({
 
   useEffect(() => {
     if (showCursor && cursorRef.current) {
-      gsap.set(cursorRef.current, { opacity: 1 });
+      gsap.set(cursorRef.current, { opacity: 1, force3D: true });
       gsap.to(cursorRef.current, {
         opacity: 0,
         duration: cursorBlinkDuration,
         repeat: -1,
         yoyo: true,
-        ease: 'power2.inOut'
+        ease: 'power2.inOut',
+        force3D: true
       });
     }
   }, [showCursor, cursorBlinkDuration]);
@@ -119,7 +121,7 @@ const TextType = ({
 
           setCurrentTextIndex(prev => (prev + 1) % textArray.length);
           setCurrentCharIndex(0);
-          timeout = setTimeout(() => {}, pauseDuration);
+          timeout = setTimeout(() => {}, 100);
         } else {
           timeout = setTimeout(() => {
             setDisplayedText(prev => prev.slice(0, -1));
@@ -127,6 +129,7 @@ const TextType = ({
         }
       } else {
         if (currentCharIndex < processedText.length) {
+          if (!hasStarted) setHasStarted(true);
           timeout = setTimeout(
             () => {
               setDisplayedText(prev => prev + processedText[currentCharIndex]);
@@ -164,7 +167,9 @@ const TextType = ({
     isVisible,
     reverseMode,
     variableSpeed,
-    onSentenceComplete
+    onSentenceComplete,
+    hasStarted,
+    getRandomSpeed
   ]);
 
   const shouldHideCursor =
@@ -175,9 +180,10 @@ const TextType = ({
     {
       ref: containerRef,
       className: `inline-block whitespace-pre-wrap tracking-tight ${className}`,
+      style: { willChange: 'contents', transform: 'translateZ(0)' },
       ...props
     },
-    <span className="inline" style={{ color: getCurrentTextColor() || 'inherit' }}>
+    <span className="inline" style={{ color: getCurrentTextColor() || 'inherit', transform: 'translateZ(0)', willChange: 'contents' }}>
       {displayedText}
     </span>,
     showCursor && (

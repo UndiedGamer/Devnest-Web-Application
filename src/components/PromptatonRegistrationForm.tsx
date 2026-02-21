@@ -34,7 +34,7 @@ const PAYMENT_QR_ENDPOINT = "/api/payment-qr";
 
 const normalizeRoll = (roll?: string | null) => roll?.trim().toLowerCase() ?? "";
 
-export type ByteBloomFormValues = {
+export type PromptatonFormValues = {
 	fullName: string;
 	rollNumber: string;
 	department: string;
@@ -49,7 +49,7 @@ export type ByteBloomFormValues = {
 	notes: string;
 };
 
-const bytebloomDefaultValues: ByteBloomFormValues = {
+const promptathonDefaultValues: PromptatonFormValues = {
 	fullName: "",
 	rollNumber: "",
 	department: "",
@@ -64,7 +64,7 @@ const bytebloomDefaultValues: ByteBloomFormValues = {
 	notes: "",
 };
 
-export const ByteBloomRegistrationForm = () => {
+export const PromptatonRegistrationForm = () => {
 	const { toast } = useToast();
 	const [status, setStatus] = useState<"idle" | "loading">("idle");
 	const [qrStatus, setQrStatus] = useState<"loading" | "loaded" | "error">("loading");
@@ -73,8 +73,8 @@ export const ByteBloomRegistrationForm = () => {
 	const qrObjectUrlRef = useRef<string | null>(null);
 	const isMountedRef = useRef(true);
 
-	const form = useForm<ByteBloomFormValues>({
-		defaultValues: bytebloomDefaultValues,
+	const form = useForm<PromptatonFormValues>({
+		defaultValues: promptathonDefaultValues,
 	});
 
 	const participationType = useWatch({ control: form.control, name: "participationType" });
@@ -91,7 +91,7 @@ export const ByteBloomRegistrationForm = () => {
 
 			const values = form.getValues();
 			const rollFields: Array<{
-				field: keyof ByteBloomFormValues;
+				field: keyof PromptatonFormValues;
 				value: string;
 			}> = [
 					{ field: "rollNumber", value: values.rollNumber },
@@ -136,51 +136,36 @@ export const ByteBloomRegistrationForm = () => {
 			}
 			console.error("Payment QR load error", error);
 			setQrStatus("error");
-			setQrSrc(null);
 		}
 	}, []);
 
 	useEffect(() => {
-		isMountedRef.current = true;
 		loadPaymentQr();
-
 		return () => {
 			isMountedRef.current = false;
 			if (qrObjectUrlRef.current) {
 				URL.revokeObjectURL(qrObjectUrlRef.current);
-				qrObjectUrlRef.current = null;
 			}
 		};
 	}, [loadPaymentQr]);
 
-	useEffect(() => {
-		if (participationType === "individual") {
-			form.setValue("teamName", "");
-			form.setValue("teamMember2", "");
-			form.setValue("teamMember2Roll", "");
-		}
-	}, [participationType, form]);
-
-	const onSubmit = async (values: ByteBloomFormValues) => {
+	const onSubmit = async (values: PromptatonFormValues) => {
 		setStatus("loading");
+
 		try {
 			const response = await fetch("/api/promptathon", {
 				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					...values,
-					submittedAt: new Date().toISOString(),
-				}),
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(values),
 			});
 
 			if (!response.ok) {
-				let errorMessage = "Unable to submit form";
+				let errorMessage = "Submission blocked. Please check your details.";
 				let handled = false;
+
 				try {
 					const errorData = await response.json();
-					if (errorData?.message) {
+					if (typeof errorData?.message === "string") {
 						errorMessage = errorData.message;
 					}
 					if (Array.isArray(errorData?.conflicts) && errorData.conflicts.length > 0) {
@@ -189,7 +174,7 @@ export const ByteBloomRegistrationForm = () => {
 						errorMessage = `${errorMessage} (Conflicts: ${errorData.conflicts.join(", ")})`;
 					}
 				} catch (parseError) {
-					console.error("ByteBloom hackfest error payload parse", parseError);
+					console.error("Promptathon error payload parse", parseError);
 				}
 
 				if (handled) {
@@ -209,7 +194,7 @@ export const ByteBloomRegistrationForm = () => {
 				description: "We will reach out with next steps soon.",
 			});
 
-			form.reset(bytebloomDefaultValues);
+			form.reset(promptathonDefaultValues);
 		} catch (error) {
 			console.error("Promptathon submission error", error);
 			const fallbackMessage = "Please try again or email us at devnest.techclub@gmail.com.";
@@ -284,7 +269,7 @@ export const ByteBloomRegistrationForm = () => {
 							<FormField
 								control={form.control}
 								name="department"
-								rules={{ required: "Department & year is required" }}
+								rules={{ required: "Department is required" }}
 								render={({ field }) => (
 									<FormItem>
 										<FormLabel>Department *</FormLabel>
@@ -321,8 +306,7 @@ export const ByteBloomRegistrationForm = () => {
 								rules={{
 									required: "Email is required",
 									pattern: {
-										value:
-											/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$/,
+										value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
 										message: "Enter a valid email address",
 									},
 								}}
@@ -437,123 +421,127 @@ export const ByteBloomRegistrationForm = () => {
 								Scan the QR code below to complete payment and enter your transaction ID.
 							</p>
 						</div>
-						<div className="grid gap-8 lg:grid-cols-[1.1fr,0.9fr] items-start">
-							<div className="space-y-6">
-								<FormField
-									control={form.control}
-									name="transactionId"
-									rules={{ required: "Transaction / UPI reference is required" }}
-									render={({ field }) => (
-										<FormItem>
-											<FormLabel>Transaction / UPI Reference ID *</FormLabel>
-											<FormControl>
-												<Input placeholder="UPI12345" {...field} />
-											</FormControl>
-											<FormDescription>
-												You will find this in your payment success screen or SMS/email notification.
-											</FormDescription>
-											<FormMessage />
-										</FormItem>
-									)}
-								/>
-								<FormField
-									control={form.control}
-									name="notes"
-									render={({ field }) => (
-										<FormItem>
-											<FormLabel>Notes / Special Requests</FormLabel>
-											<FormControl>
-												<Textarea
-													placeholder="Anything we should know? Dietary needs, travel info, etc."
-													className="min-h-[110px]"
-													{...field}
-												/>
-											</FormControl>
-											<FormMessage />
-										</FormItem>
-									)}
-								/>
-								<FormField
-									control={form.control}
-									name="joinedWhatsapp"
-									rules={{ validate: (value) => (value ? true : "Please join the WhatsApp group") }}
-									render={({ field }) => (
-										<FormItem className="flex flex-row items-start gap-3 rounded-2xl border border-border/60 p-4">
-											<FormControl>
-												<Checkbox
-													checked={field.value}
-													onCheckedChange={(checked) => field.onChange(checked === true)}
-												/>
-											</FormControl>
-											<div className="space-y-1 text-sm leading-tight">
-												<FormLabel className="font-semibold">Joined the official WhatsApp group *</FormLabel>
-												<p className="text-muted-foreground">
-													Tap the link to stay updated: <Link href={WHATSAPP_GROUP_LINK} target="_blank" rel="noreferrer" className="text-primary underline">ByteBloom hackfest WhatsApp Lobby</Link>
-												</p>
-											</div>
-											<FormMessage />
-										</FormItem>
-									)}
-								/>
-							</div>
-							<div className="glass-effect rounded-3xl border border-border/40 p-6 text-center">
-								<p className="text-sm text-muted-foreground mb-3">Scan & pay ₹100 / participant</p>
-								<div className="mx-auto flex min-h-[320px] w-full max-w-xs items-center justify-center rounded-xl border border-primary/40 bg-muted/40 p-3">
-									{qrStatus === "loading" && (
-										<Loader2 className="h-6 w-6 animate-spin text-primary" />
-									)}
-									{qrStatus === "error" && (
-										<div className="space-y-3 text-sm text-muted-foreground">
-											<p>Unable to load the QR right now.</p>
-											<Button size="sm" variant="outline" onClick={loadPaymentQr}>
-												Try again
-											</Button>
-										</div>
-									)}
-									{qrStatus === "loaded" && qrSrc && (
-										<Image
-											src={qrSrc}
-											alt="Promptathon payment QR"
-											width={320}
-											height={320}
-											className="h-auto w-full rounded-xl"
-											unoptimized
-										/>
-									)}
+						<div className="flex flex-col items-center gap-6">
+							{qrStatus === "loading" ? (
+								<div className="flex items-center justify-center p-12 glass-effect rounded-2xl">
+									<Loader2 className="h-8 w-8 animate-spin text-primary" />
 								</div>
-								<p className="text-xs text-muted-foreground mt-3">
-									If prompted, confirm the receiver name shows DevNest Technical Club before completing the transfer.
-								</p>
-								<div className="mt-4 flex flex-col gap-3 text-sm">
-									<Button asChild variant="outline" className="gap-2">
-										<Link href={WHATSAPP_GROUP_LINK} target="_blank" rel="noreferrer">
-											Join WhatsApp Lobby
-										</Link>
-									</Button>
-									<Button asChild variant="ghost" className="gap-2">
-										<Link href={`mailto:${CONTACT_EMAILS[0]}`}>
-											Need help? Email us
-										</Link>
+							) : qrStatus === "error" ? (
+								<div className="p-6 glass-effect rounded-2xl text-center">
+									<p className="text-muted-foreground mb-2">
+										Failed to load payment QR code.
+									</p>
+									<Button variant="outline" onClick={loadPaymentQr}>
+										Retry
 									</Button>
 								</div>
-							</div>
+							) : qrSrc ? (
+								<div className="max-w-xs w-full glass-effect rounded-2xl p-6">
+									<Image
+										src={qrSrc}
+										alt="Payment QR Code"
+										width={300}
+										height={300}
+										className="w-full h-auto rounded-lg"
+										priority
+									/>
+								</div>
+							) : null}
 						</div>
+						<FormField
+							control={form.control}
+							name="transactionId"
+							rules={{ required: "Transaction ID is required" }}
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Transaction ID / UTR Number *</FormLabel>
+									<FormControl>
+										<Input placeholder="Enter transaction ID from payment confirmation" {...field} />
+									</FormControl>
+									<FormDescription>
+										Complete the payment using the QR code above and enter the transaction ID here.
+									</FormDescription>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
 					</div>
 
-					<div className="space-y-4 pt-8 border-t border-border/60">
-						<div className="rounded-2xl border border-dashed border-primary/40 bg-primary/5 p-4 text-sm text-primary">
-							Uploading the wrong payment or incomplete team details may delay verification. Double-check everything before you hit submit.
-						</div>
-						<div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-							<p className="text-sm text-muted-foreground">
-								By submitting, you agree to ByteBloom hackfest guidelines and consent to DevNest contacting you via email/WhatsApp.
-							</p>
-							<Button type="submit" className="gap-2" disabled={status === "loading"}>
-								{status === "loading" && <Loader2 className="h-4 w-4 animate-spin" />}
-								Submit Registration
-							</Button>
-						</div>
+					<div className="space-y-4">
+						<FormField
+							control={form.control}
+							name="joinedWhatsapp"
+							rules={{
+								validate: (value) =>
+									value || "You must join the WhatsApp group to proceed",
+							}}
+							render={({ field }) => (
+								<FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+									<FormControl>
+										<Checkbox checked={field.value} onCheckedChange={field.onChange} />
+									</FormControl>
+									<div className="space-y-1 leading-none">
+										<FormLabel>
+											I have joined the official WhatsApp group *
+										</FormLabel>
+										<FormDescription>
+											<Link
+												href={WHATSAPP_GROUP_LINK}
+												target="_blank"
+												rel="noreferrer"
+												className="text-primary hover:underline"
+											>
+												Click here to join the group
+											</Link>
+											. All event updates will be shared there.
+										</FormDescription>
+										<FormMessage />
+									</div>
+								</FormItem>
+							)}
+						/>
+						<FormField
+							control={form.control}
+							name="notes"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Additional Notes (Optional)</FormLabel>
+									<FormControl>
+										<Textarea
+											placeholder="Any questions or special requirements?"
+											className="resize-none"
+											rows={3}
+											{...field}
+										/>
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
 					</div>
+
+					<div className="flex justify-center">
+						<Button
+							type="submit"
+							size="lg"
+							disabled={status === "loading"}
+							className="min-w-[200px]"
+						>
+							{status === "loading" ? (
+								<>
+									<Loader2 className="mr-2 h-4 w-4 animate-spin" />
+									Submitting...
+								</>
+							) : (
+								"Submit Registration"
+							)}
+						</Button>
+					</div>
+
+					<p className="text-center text-sm text-muted-foreground">
+						By submitting this form, you agree to share your details with DevNest Technical Club for event coordination. For queries, contact{" "}
+						{CONTACT_EMAILS[0]}.
+					</p>
 				</form>
 			</Form>
 		</section>

@@ -3,6 +3,8 @@ import { ArrowLeft, Calendar, User, ImageIcon } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import ShinyText from "@/components/ShinyText";
+import Shuffle from "@/components/Shuffle";
 
 export default function GuestSpeakerFebPage() {
 
@@ -26,7 +28,7 @@ export default function GuestSpeakerFebPage() {
 							Event Completed • 5th February 2026
 						</div>
 						<h1 className="text-4xl sm:text-5xl font-poppins font-bold mb-4">
-							Guest Speaker Event
+							<Shuffle text="Guest Speaker Event" />
 						</h1>
 						<p className="text-muted-foreground max-w-2xl mx-auto">
 							Thank you to everyone who attended our inspiring session with <span className="font-semibold text-foreground">Amit Kumar Jaiswal</span>, IIM Bangalore graduate and founder of <span className="font-semibold text-foreground">aptitude360online</span>. Check out the event highlights below!
@@ -41,7 +43,7 @@ export default function GuestSpeakerFebPage() {
 								Event Gallery
 							</div>
 							<h2 className="text-2xl sm:text-3xl font-poppins font-bold mb-2">
-								Event Highlights
+								<ShinyText text="Event Highlights" speed={2} />
 							</h2>
 							<p className="text-muted-foreground">
 								Capturing the moments from our guest speaker session

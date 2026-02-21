@@ -3,6 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Zap, Users, Trophy, Building2 } from "lucide-react";
+import ShinyText from "@/components/ShinyText";
+import TextType from "@/components/TextType";
+import dynamic from "next/dynamic";
+
+const FaultyTerminal = dynamic(() => import("@/components/FaultyTerminal"), {
+  ssr: false,
+});
 
 const HERO_QUOTES = [
   '"Build something that makes a difference."',
@@ -62,24 +69,49 @@ export function Hero() {
 
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-background via-background to-muted/30">
+      {/* FaultyTerminal Background */}
+      <div className="absolute inset-0 z-0 opacity-20">
+        <FaultyTerminal
+          scale={0.7}
+          gridMul={[12, 12]}
+          digitSize={0.5}
+          timeScale={1}
+          scanlineIntensity={0.3}
+          glitchAmount={0.2}
+          flickerAmount={0.1}
+          noiseAmp={0.05}
+          chromaticAberration={0.002}
+          tint="#00B871"
+          pageLoadAnimation={false}
+        />
+      </div>
+
+      {/* Animated Dot Matrix Background */}
+      <div className="absolute inset-0 opacity-[0.15] z-[1]" style={{ willChange: 'transform', transform: 'translateZ(0)' }}>
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'radial-gradient(circle, rgba(0, 184, 113, 0.4) 1px, transparent 1px)',
+          backgroundSize: '30px 30px',
+          animation: 'float 20s ease-in-out infinite',
+          willChange: 'transform',
+          transform: 'translateZ(0)'
+        }} />
+      </div>
+
       {/* Animated Background Grid */}
-      <div className="absolute inset-0 opacity-20">
+      <div className="absolute inset-0 opacity-[0.08] z-[1]" style={{ willChange: 'transform', transform: 'translateZ(0)' }}>
         <div
           className="absolute inset-0"
           style={{
             backgroundImage: `
-              linear-gradient(0deg, transparent 24%, rgba(0, 207, 253, 0.05) 25%, rgba(0, 207, 253, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 207, 253, 0.05) 75%, rgba(0, 207, 253, 0.05) 76%, transparent 77%, transparent),
-              linear-gradient(90deg, transparent 24%, rgba(0, 207, 253, 0.05) 25%, rgba(0, 207, 253, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 207, 253, 0.05) 75%, rgba(0, 207, 253, 0.05) 76%, transparent 77%, transparent)
+              linear-gradient(0deg, transparent 24%, rgba(0, 184, 113, 0.08) 25%, rgba(0, 184, 113, 0.08) 26%, transparent 27%, transparent 74%, rgba(0, 184, 113, 0.08) 75%, rgba(0, 184, 113, 0.08) 76%, transparent 77%, transparent),
+              linear-gradient(90deg, transparent 24%, rgba(0, 184, 113, 0.08) 25%, rgba(0, 184, 113, 0.08) 26%, transparent 27%, transparent 74%, rgba(0, 184, 113, 0.08) 75%, rgba(0, 184, 113, 0.08) 76%, transparent 77%, transparent)
             `,
             backgroundSize: "50px 50px",
           }}
         />
       </div>
 
-      {/* Glowing orbs */}
-      <div className="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-pulse" />
-      <div className="absolute bottom-20 right-10 w-72 h-72 bg-secondary/20 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-pulse animation-delay-2000" />
-      <div className="absolute top-1/2 left-1/2 w-72 h-72 bg-primary/10 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse animation-delay-4000" />
+      {/* Removed animated glowing orbs - using global background from Layout instead */}
 
       {/* Hero Content */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
@@ -101,14 +133,31 @@ export function Hero() {
             className="w-16 h-16 sm:w-20 sm:h-20 object-contain drop-shadow-lg shadow-primary/30 animate-bounce"
             style={{ animationDuration: "3s" }}
           />
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-poppins font-bold glow-text">
-            DevNest
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-poppins font-bold">
+            <ShinyText
+              text="DevNest"
+              className="glow-text"
+              speed={3}
+              shineColor="#00B871"
+            />
           </h1>
         </div>
 
         {/* Main Heading */}
         <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-poppins font-bold mb-3 sm:mb-4 text-foreground px-2">
-          At DevNest, we don't just learn technology — we <span className="text-primary">live it</span>
+          <TextType
+            text={[
+              "At DevNest, we don't just learn technology — we live it",
+              "Build. Innovate. Transform.",
+              "Where ideas become reality"
+            ]}
+            typingSpeed={40}
+            initialDelay={0}
+            pauseDuration={1200}
+            deletingSpeed={20}
+            loop={true}
+            className="text-foreground"
+          />
         </h2>
 
         {/* Subheading */}
@@ -128,7 +177,7 @@ export function Hero() {
           <Button
             asChild
             size="lg"
-            className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground gap-2 neon-border"
+            className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground gap-2 neon-border shadow-lg shadow-primary/50 hover:shadow-primary/70 transition-all"
           >
             <Link href="/join">
               <Zap className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -139,7 +188,7 @@ export function Hero() {
             asChild
             size="lg"
             variant="outline"
-            className="w-full sm:w-auto border-secondary text-secondary hover:bg-secondary/10 gap-2"
+            className="w-full sm:w-auto border-primary/50 text-foreground hover:bg-primary/10 hover:border-primary gap-2 shadow-md hover:shadow-lg hover:shadow-primary/30 transition-all"
           >
             <Link href="/projects">💡 Explore Projects</Link>
           </Button>
@@ -165,8 +214,8 @@ export function Hero() {
           </div>
 
           <div className="glass-effect rounded-lg p-4 sm:p-6 hover-lift">
-            <Zap className="w-6 h-6 sm:w-8 sm:h-8 text-secondary mx-auto mb-2" />
-            <div className="text-2xl sm:text-3xl md:text-4xl font-poppins font-bold text-secondary mb-1">
+            <Zap className="w-6 h-6 sm:w-8 sm:h-8 text-primary mx-auto mb-2" />
+            <div className="text-2xl sm:text-3xl md:text-4xl font-poppins font-bold text-primary mb-1">
               {counters.events}+
             </div>
             <p className="text-xs sm:text-sm text-muted-foreground">Tech Events</p>

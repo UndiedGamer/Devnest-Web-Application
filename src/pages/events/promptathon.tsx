@@ -74,14 +74,14 @@ export default function PromptatonEventPage() {
 						</div>
 						<div className="flex flex-col sm:flex-row gap-4 justify-center">
 							<Button asChild size="lg" className="gap-2 text-base sm:text-lg py-6 sm:py-7 font-semibold shadow-lg hover:shadow-xl transition-all">
-								<Link href="/events/bytebloom-register">
+								<Link href="/events/promptathon-register">
 									<Zap className="h-5 w-5" />
 									Register Now
 								</Link>
 							</Button>
 							<Button asChild variant="outline" size="lg" className="py-6 sm:py-7">
 								<Link href={WHATSAPP_GROUP_LINK} target="_blank" rel="noreferrer">
-									Join WhatsApp Lobby
+									Join WhatsApp Group
 								</Link>
 							</Button>
 						</div>
@@ -160,9 +160,9 @@ const PromptatonDetailsSection = () => (
 
 		<div className="flex justify-center">
 			<Button asChild size="lg" className="gap-2 text-base sm:text-lg px-8 py-6 sm:py-7 font-semibold shadow-lg hover:shadow-xl transition-all">
-				<Link href="/events/bytebloom-register">
+				<Link href="/events/promptathon-register">
 					<Zap className="h-5 w-5" />
-					Register Your Team Now
+					Register Now
 				</Link>
 			</Button>
 		</div>
@@ -184,7 +184,7 @@ const PromptatonDetailsSection = () => (
 			</div>
 			<div className="flex flex-wrap gap-3 mb-4">
 				<Button asChild size="lg" className="gap-2 font-semibold">
-					<Link href="/events/bytebloom-register">
+					<Link href="/events/promptathon-register">
 						<Zap className="h-4 w-4" />
 						Register Now
 					</Link>

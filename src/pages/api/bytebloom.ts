@@ -1,22 +1,19 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
 import {
-	appendByteBloomSubmission,
+	appendPromptatonSubmission,
 	getExistingRollConflicts,
-	type ByteBloomSubmissionRecord,
-} from "../../../server/bytebloom-storage";
+	type PromptatonSubmissionRecord,
+} from "../../../server/promptathon-storage";
 
-const requiredFields: Array<keyof ByteBloomSubmissionRecord> = [
+const requiredFields: Array<keyof PromptatonSubmissionRecord> = [
 	"submittedAt",
 	"fullName",
 	"rollNumber",
 	"department",
 	"whatsappNumber",
 	"email",
-	"teamName",
-	"teamSize",
-	"participant2",
-	"participant2Roll",
+	"participationType",
 	"transactionId",
 ];
 
@@ -26,7 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		return res.status(405).json({ message: "Method not allowed" });
 	}
 
-	const payload = req.body as Partial<ByteBloomSubmissionRecord>;
+	const payload = req.body as Partial<PromptatonSubmissionRecord>;
 
 	const missing = requiredFields.filter((field) => {
 		const value = payload[field];
@@ -41,9 +38,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 	const incomingRolls = [
 		payload.rollNumber,
-		payload.participant2Roll,
-		payload.participant3Roll,
-		payload.participant4Roll,
+		payload.teamMember2Roll,
 	].filter((roll) => !!roll);
 
 	try {
@@ -55,30 +50,26 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			});
 		}
 
-		const record: ByteBloomSubmissionRecord = {
+		const record: PromptatonSubmissionRecord = {
 			submittedAt: payload.submittedAt!,
 			fullName: payload.fullName!,
 			rollNumber: payload.rollNumber!,
 			department: payload.department!,
 			whatsappNumber: payload.whatsappNumber!,
 			email: payload.email!,
-			teamName: payload.teamName!,
-			teamSize: payload.teamSize as "2" | "3" | "4",
-			participant2: payload.participant2!,
-			participant2Roll: payload.participant2Roll!,
-			participant3: payload.participant3 ?? "",
-			participant3Roll: payload.participant3Roll ?? "",
-			participant4: payload.participant4 ?? "",
-			participant4Roll: payload.participant4Roll ?? "",
+			participationType: payload.participationType as "individual" | "team",
+			teamName: payload.teamName ?? "",
+			teamMember2: payload.teamMember2 ?? "",
+			teamMember2Roll: payload.teamMember2Roll ?? "",
 			transactionId: payload.transactionId!,
 			notes: payload.notes ?? "",
 		};
 
-		await appendByteBloomSubmission(record);
+		await appendPromptatonSubmission(record);
 
 		return res.status(200).json({ message: "Submission stored" });
 	} catch (error) {
-		console.error("ByteBloom API error", error);
+		console.error("Promptathon API error", error);
 		return res.status(500).json({ message: "Failed to save submission" });
 	}
 }

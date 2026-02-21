@@ -113,7 +113,10 @@ const ShinyText: React.FC<ShinyTextProps> = ({
     backgroundSize: '200% auto',
     WebkitBackgroundClip: 'text',
     backgroundClip: 'text',
-    WebkitTextFillColor: 'transparent'
+    WebkitTextFillColor: 'transparent',
+    transform: 'translateZ(0)',
+    willChange: 'background-position',
+    backfaceVisibility: 'hidden' as const
   };
 
   return (

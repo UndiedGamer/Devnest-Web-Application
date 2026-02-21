@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { TeamCard } from "@/components/TeamCard";
+import ShinyText from "@/components/ShinyText";
 import teamData from "@/data/team.json";
 
 interface TeamMember {
@@ -22,9 +23,7 @@ export function Team() {
 
   return (
     <section id="team" className="relative py-16 sm:py-20 bg-gradient-to-b from-background via-muted/20 to-background overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-primary/10 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/10 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse animation-delay-2000" />
+      {/* Removed animated background - using global background from Layout */}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
@@ -40,7 +39,7 @@ export function Team() {
             <span className="text-primary text-xs sm:text-sm font-medium">Meet the Team</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-poppins font-bold mb-3 sm:mb-4">
-            Our <span className="glow-text">Core Team</span>
+            Our <ShinyText text="Core Team" className="glow-text" speed={2} />
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
             Passionate leaders and mentors driving innovation across multiple tech domains

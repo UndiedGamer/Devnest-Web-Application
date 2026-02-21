@@ -4,28 +4,29 @@ import { Award, Calendar, Clock, MapPin, Users, Zap, CalendarDays } from "lucide
 
 import { Layout } from "@/components/Layout";
 import { Button } from "@/components/ui/button";
+import ShinyText from "@/components/ShinyText";
 
 const upcomingEvents = [
 	{
 		id: 1,
-		title: "ByteBloom hackfest 2025",
-		date: "November 2025",
-		time: "12-hour marathon",
-		location: "Lamrin Tech Skills University, Punjab",
+		title: "Promptathon in Yuva Kaushal",
+		date: "February 25, 2025",
+		time: "11:00 AM to 3:00 PM",
+		location: "IBM Lab, Lamrin Tech Skills University",
 		description:
-			"Hosted by the DevNest Technical Club, ByteBloom hackfest is your 12-hour playground to brainstorm, build, and ship impactful prototypes with guidance from industry mentors.",
-		domains: ["AI", "Cybersecurity", "Web Development"],
-		capacity: "500+ Students",
+			"Where WORDS CONTROL INTELLIGENCE. Not Speed. Not Code. Just Pure Thinking Power. Craft prompts that push AI past the obvious. If you can ask better, you win.",
+		domains: ["AI", "Prompt Engineering", "Critical Thinking"],
+		capacity: "Open to all students",
 		highlights: [
-			"Real-world problem statements",
-			"Mentorship pods all night",
-			"Google-certified participation",
-			"Cash prizes & spotlight",
+			"AI prompt engineering competition",
+			"Pure thinking power challenge",
+			"Expert guidance and mentorship",
+			"Exciting prizes and recognition",
 		],
 		status: "open" as const,
-		icon: "🚀",
-		registrationUrl: "/events/bytebloom-register",
-		learnMoreUrl: "/events/bytebloom",
+		icon: "⚡",
+		registrationUrl: "/events/promptathon-register",
+		learnMoreUrl: "/events/promptathon",
 	},
 ];
 
@@ -46,16 +47,16 @@ export default function EventsPage() {
 
 	return (
 		<Layout>
-			<div className="min-h-screen py-20 bg-gradient-to-b from-background to-muted/30">
-				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div className="relative min-h-screen py-20">
+				<div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<header className="text-center mb-16">
 						<div className="mb-6 inline-block">
 							<span className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-medium">
 								🎉 DevNest Events Calendar
 							</span>
 						</div>
-						<h1 className="text-5xl sm:text-6xl font-poppins font-bold mb-4 glow-text">
-							Events & Hackathons
+						<h1 className="text-5xl sm:text-6xl font-poppins font-bold mb-4">
+							<ShinyText text="Events & Hackathons" className="glow-text" speed={2} />
 						</h1>
 						<p className="text-lg text-muted-foreground max-w-2xl mx-auto">
 							Join our community events, hackathons, workshops, and tech talks throughout the year. Build, collaborate, and innovate with us!
@@ -196,7 +197,7 @@ export default function EventsPage() {
 														href={event.learnMoreUrl}
 														className="text-sm text-primary hover:underline"
 													>
-														Explore the ByteBloom hackfest hub →
+														Explore the Promptathon hub →
 													</Link>
 												</>
 											) : (
@@ -209,7 +210,7 @@ export default function EventsPage() {
 								</article>
 							))}
 
-							<ByteBloomPromoCard />
+							<PromptatonPromoCard />
 						</div>
 					)}
 
@@ -284,7 +285,7 @@ export default function EventsPage() {
 	);
 }
 
-const ByteBloomPromoCard = () => (
+const PromptatonPromoCard = () => (
 	<section className="glass-effect rounded-3xl border border-border/40 bg-background/80 p-8">
 		<div className="grid gap-6 lg:grid-cols-[1.2fr,0.8fr] items-center">
 			<div>
@@ -292,19 +293,19 @@ const ByteBloomPromoCard = () => (
 					Spotlight
 				</p>
 				<h3 className="text-3xl font-poppins font-bold mb-4">
-					ByteBloom hackfest 2025
+					Promptathon in Yuva Kaushal
 				</h3>
 				<p className="text-muted-foreground mb-5">
-					Dive deeper into challenge statements, timelines, and submission details on the dedicated ByteBloom hackfest hub, complete with FAQs and the official DevNest registration form.
+					Where WORDS CONTROL INTELLIGENCE. Craft prompts that push AI past the obvious. A unique competition testing your ability to communicate with AI effectively. Prompt Smarter. Think Deeper. Dominate Louder.
 				</p>
 				<div className="flex flex-col gap-3 sm:flex-row">
 					<Button asChild className="gap-2">
-						<Link href="/events/bytebloom">
+						<Link href="/events/promptathon">
 							Explore the full event
 						</Link>
 					</Button>
 					<Button asChild variant="outline" className="gap-2">
-						<Link href="/events/bytebloom-register">
+						<Link href="/events/promptathon-register">
 							Jump to registration
 						</Link>
 					</Button>
@@ -313,10 +314,12 @@ const ByteBloomPromoCard = () => (
 			<div className="rounded-2xl border border-dashed border-primary/40 p-6 text-sm text-muted-foreground">
 				<p className="font-semibold text-primary mb-2">Key Details</p>
 				<ul className="space-y-2">
-					<li>🏆 Cash prizes + participation certificates</li>
-					<li>👥 Teams of 2–4 from any department</li>
-					<li>📍 On-campus at Lamrin Tech Skills University</li>
-					<li>🗓️ Registration deadline: 28 Oct 2025</li>
+					<li>⚡ Pure thinking power competition</li>
+					<li>📍 IBM Lab, LTSU Punjab</li>
+					<li>🗓️ February 25, 2025</li>
+					<li>⏰ 11:00 AM to 3:00 PM</li>
+					<li>📞 Student: +91 80921 37404</li>
+					<li>📞 Faculty: +91 60050 17400</li>
 				</ul>
 			</div>
 		</div>
